@@ -5,20 +5,20 @@ sudo nano /etc/systemd/system/camera_motion.service
 #----------------------------
 
 [Unit]
-Description=Motion Camera Telegram Bot
-After=network-online.target  # Ждём интернет!
-Wants=network-online.target  # Обязательно для Wi-Fi
+Description=Мой Python-скрипт
+After=network.target  # Зависимости (например, ждём загрузки сети)
 
 [Service]
 Type=simple
-User=pi
-ExecStart=/usr/bin/python3 /home/pi/your_script.py
-Restart=on-failure  # Перезапуск при ошибках
-RestartSec=10s      # Ждать 10 сек перед перезапуском
-Environment=PYTHONUNBUFFERED=1
+User=username       # Пользователь, от которого запускается скрипт
+WorkingDirectory=/path/to/script  # Директория, где лежит скрипт
+ExecStart=/usr/bin/python3 /path/to/script/your_script.py  # Команда запуска
+Restart=on-failure  # Перезапускать при ошибках
+RestartSec=5        # Ждать 5 секунд перед перезапуском
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target  # Запускать при загрузке системы
+
 
 #---------------------------
 
